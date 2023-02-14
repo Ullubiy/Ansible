@@ -1,0 +1,59 @@
+---
+- name: provisioning build environment
+  hosts: build
+  become: yes
+
+ tasks: 
+ - name: Ensure the packages is present
+   apt:
+
+     - maven
+     - tomcat
+     - git
+
+   state: present
+
+ - name: Ensure demo project is downloaded
+   git:
+
+     repo: http://github.com/miladhub/calculator-servlet-example
+     dest: /tmp/calculator-servlet-example
+     clone: yes
+
+ - name: Ensure tomcat9 package is present
+   apt: 
+     name: tomcat9
+     state: present
+   
+ - name: Ensure the war is build
+   command: mvn --batch-mode --quiet install
+   args: 
+    chdir: /tmp/calculator-servlet-example/target/mycalcwebapp.war
+
+- name: provisioning prod environment 
+   hosts: prod
+   become: yes
+
+ tasks:
+ - name: Ensure the java is present 
+   apt: 
+      name: default-jdk
+      state: present
+
+ - name: Ensure the tomcat9 is present 
+   apt: 
+      name: tomcat9
+      state: present
+
+ - name: Ensure the tomcat9 is present 
+   apt: 
+      name: tomcat9
+      state: present
+ 
+ - name: Ensure the war copy from build to prod 
+   synchronize: 
+      mode: push
+      src: /tmp/calculator-servlet-example/target/mycalcwebapp.war
+      dest: /var/lib/tomcat9/webapps/
+
+
