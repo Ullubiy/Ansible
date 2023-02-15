@@ -34,21 +34,21 @@
     hosts: prod
     become: yes
 
-   tasks:
-   - name: Ensure the java is present 
-     apt: 
-       name: default-jdk
-       state: present
+  tasks:
+  - name: Ensure the java is present 
+    apt: 
+      name: default-jdk
+      state: present
+
+  - name: Ensure the tomcat9 is present 
+    apt: 
+      name: tomcat9
+      state: present
 
    - name: Ensure the tomcat9 is present 
      apt: 
        name: tomcat9
        state: present
-
-   - name: Ensure the tomcat9 is present 
-     apt: 
-      name: tomcat9
-      state: present
  
    - name: Ensure the war copy from build to prod 
      synchronize: 
