@@ -30,9 +30,9 @@
     args: 
     chdir: /tmp/Ansible/target/mycalcwebapp.war
 
-  - name: provisioning prod environment 
-    hosts: prod
-    become: yes
+- name: provisioning prod environment 
+  hosts: prod
+  become: yes
 
   tasks:
   - name: Ensure the java is present 
