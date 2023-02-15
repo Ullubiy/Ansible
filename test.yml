@@ -4,11 +4,11 @@
   become: yes
 
   tasks: 
-  - name: Ensure the packages is present
-    apt:
-      - maven
-      - tomcat
-      - git
+   - name: Ensure the packages is present
+     apt:
+       - maven
+       - tomcat
+       - git
 
     state: present
 
