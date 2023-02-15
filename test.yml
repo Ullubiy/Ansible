@@ -45,15 +45,15 @@
       name: tomcat9
       state: present
 
-   - name: Ensure the tomcat9 is present 
-     apt: 
-       name: tomcat9
-       state: present
+  - name: Ensure the tomcat9 is present 
+    apt: 
+      name: tomcat9
+      state: present
  
-   - name: Ensure the war copy from build to prod 
-     synchronize: 
-       mode: push
-       src: /tmp/calculator-servlet-example/target/mycalcwebapp.war
-       dest: /var/lib/tomcat9/webapps/
+  - name: Ensure the war copy from build to prod 
+    synchronize: 
+      mode: push
+      src: /tmp/calculator-servlet-example/target/mycalcwebapp.war
+      dest: /var/lib/tomcat9/webapps/
 
 
