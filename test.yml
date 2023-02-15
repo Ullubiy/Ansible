@@ -16,7 +16,7 @@
      git:
 
        repo: https://github.com/Ullubiy/Ansible.git
-        dest: /tmp
+       dest: /tmp
        clone: yes
 
    - name: Ensure tomcat9 package is present
