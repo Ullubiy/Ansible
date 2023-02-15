@@ -16,7 +16,7 @@
     git:
 
       repo: https://github.com/Ullubiy/Ansible.git
-      dest: /tmp/Ansible
+      dest: /tmp
       clone: yes
 
   - name: Ensure tomcat9 package is present
@@ -27,7 +27,13 @@
   - name: Ensure the war is build
     command: mvn --batch-mode --quiet install
     args: 
-    chdir: /tmp/Ansible/target/mycalcwebapp.war
+     chdir: /tmp/Ansible/target/webapp.war
+
+  - name: Ensure the war copy from build to master 
+    synchronize: 
+      mode: pull
+      src: /tmp/Ansible/target/webapp.war
+      dest: /tmp/
 
 - name: provisioning prod environment 
   hosts: prod
@@ -52,7 +58,7 @@
   - name: Ensure the war copy from build to prod 
     synchronize: 
       mode: push
-      src: /tmp/Ansible/target/mycalcwebapp.war
+      src: /tmp/Ansible/target/webapp.war
       dest: /var/lib/tomcat9/webapps/
 
 
