@@ -14,7 +14,6 @@
 
    - name: Ensure demo project is downloaded
      git:
-
        repo: https://github.com/Ullubiy/Ansible.git
        dest: /tmp
        clone: yes
@@ -27,7 +26,7 @@
    - name: Ensure the war is build
      command: mvn --batch-mode --quiet install
      args: 
-     chdir: /tmp/Ansible/target/webapp.war
+      chdir: /tmp/Ansible/target/webapp.war
 
    - name: Ensure the war copy from build to master 
      synchronize: 
