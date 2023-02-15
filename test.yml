@@ -10,31 +10,31 @@
        - tomcat
        - git
 
-    state: present
+     state: present
 
-  - name: Ensure demo project is downloaded
-    git:
+   - name: Ensure demo project is downloaded
+     git:
 
-      repo: https://github.com/Ullubiy/Ansible.git
-      dest: /tmp
-      clone: yes
+       repo: https://github.com/Ullubiy/Ansible.git
+        dest: /tmp
+       clone: yes
 
-  - name: Ensure tomcat9 package is present
-    apt: 
-      name: tomcat9
-      state: present
+   - name: Ensure tomcat9 package is present
+     apt: 
+       name: tomcat9
+       state: present
    
-  - name: Ensure the war is build
-    command: mvn --batch-mode --quiet install
-    args: 
+   - name: Ensure the war is build
+     command: mvn --batch-mode --quiet install
+     args: 
      chdir: /tmp/Ansible/target/webapp.war
 
-  - name: Ensure the war copy from build to master 
-    synchronize: 
-      mode: pull
-      src: /tmp/Ansible/target/webapp.war
-      dest: /tmp/
-
+   - name: Ensure the war copy from build to master 
+     synchronize: 
+       mode: pull
+       src: /tmp/Ansible/target/webapp.war
+       dest: /tmp/
+ 
 - name: provisioning prod environment 
   hosts: prod
   become: yes
