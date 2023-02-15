@@ -16,8 +16,8 @@
   - name: Ensure demo project is downloaded
     git:
 
-      repo: http://github.com/miladhub/calculator-servlet-example
-      dest: /tmp/calculator-servlet-example
+      repo: https://github.com/Ullubiy/Ansible.git
+      dest: /tmp/Ansible
       clone: yes
 
   - name: Ensure tomcat9 package is present
@@ -28,7 +28,7 @@
   - name: Ensure the war is build
     command: mvn --batch-mode --quiet install
     args: 
-    chdir: /tmp/calculator-servlet-example/target/mycalcwebapp.war
+    chdir: /tmp/Ansible/target/mycalcwebapp.war
 
   - name: provisioning prod environment 
     hosts: prod
@@ -53,7 +53,7 @@
   - name: Ensure the war copy from build to prod 
     synchronize: 
       mode: push
-      src: /tmp/calculator-servlet-example/target/mycalcwebapp.war
+      src: /tmp/Ansible/target/mycalcwebapp.war
       dest: /var/lib/tomcat9/webapps/
 
 
