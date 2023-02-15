@@ -6,10 +6,9 @@
   tasks: 
   - name: Ensure the packages is present
     apt:
-
-     - maven
-     - tomcat
-     - git
+      - maven
+      - tomcat
+      - git
 
     state: present
 
