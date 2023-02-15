@@ -13,17 +13,17 @@
     - name: Ensure demo project is downloaded
       git:
         repo: https://github.com/Ullubiy/Ansible.git
-        dest: /tmp
+        dest: /opt
         clone: yes
     - name: Ensure the war is build
       command: mvn --batch-mode --quiet install
       args:
-        chdir: /tmp/Ansible/target/webapp.war
+        chdir: /opt/Ansible/target/webapp.war
     - name: Ensure the war copy from build to master
       synchronize:
         mode: pull
-        src: /tmp/Ansible/target/webapp.war
-        dest: /tmp/
+        src: /opt/Ansible/target/webapp.war
+        dest: /opt/
 - name: provisioning prod environment
   hosts: prod
   become: yes
@@ -43,5 +43,5 @@
     - name: Ensure the war copy from build to prod
       synchronize:
         mode: push
-        src: /tmp/Ansible/target/webapp.war
-        dest: /var/lib/tomcat9/webapps/
+        src: /opt/Ansible/target/webapp.war
+        dest: /opt/lib/tomcat9/webapps/
